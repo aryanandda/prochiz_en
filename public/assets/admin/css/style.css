@@ -1,0 +1,86 @@
+.site-navbar{
+    background-color: #c32c30;
+}
+.site-menubar-unfold .site-menu-icon {
+    margin-right: 5px;
+    font-size: 1.4em;
+}
+div.dataTables_paginate .paginate_button.active > a, div.dataTables_paginate .paginate_button.active > a:focus, div.dataTables_paginate .paginate_button.active > a:hover {
+    border-color: #c32c30;
+    background-color: #c32c30;
+}
+.site-menu-title {
+    font-weight: 300;
+}
+.article-thumb{
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+.article-thumb img{
+    width: 100%;
+}
+a.article-title {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+}
+.article-desc{
+    font-size: 0.9em;
+}
+.text-right{
+    text-align: right;
+}
+.text-center{
+    text-align: center;
+}
+a.article-vid {
+    display: block;
+    height: 90px;
+    width: 160px;
+}  
+img.img-vid {
+    height: 100%;
+}
+#photo2{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: #fff; 
+    width: 100%; 
+    cursor:pointer; 
+    margin:auto;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}    
+#featured-container{
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+.page-header {
+    z-index: 10;
+}
+.timepicker-picker a.btn{
+    box-shadow: none;
+}
+table td.day {
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+}
+.form-group label {
+    font-weight: 400;
+}
+span.tag.tag-outline.tag-default a {
+    text-decoration: none;
+    color: #888;
+}
+.article-owner{
+    color: #666;
+    text-decoration: none!important;
+}
