@@ -41,10 +41,10 @@
         <div class="resep-list">
             <div class="row align-middle">
                 <div class="small-12 medium-6 large-8 column">
-                    <h2 class="title-section resep-title small-text-center">RESEP {{ strtoupper($event->name) }}</h2>
+                    <h2 class="title-section resep-title small-text-center">RECIPE {{ strtoupper($event->name) }}</h2>
                 </div>
                 <div class="medium-6 large-4 column text-right show-for-medium">
-                    <a href="{{ url('/event/'.$event->slug.'/resep') }}" class="button lihat">lihat semua</a>
+                    <a href="{{ url('/event/'.$event->slug.'/resep') }}" class="button lihat">see all</a>
                 </div>
             </div>
             
@@ -72,7 +72,7 @@
             <div class="spacer hide-for-medium"></div>
             
             <div class="small-12 column text-center hide-for-medium">
-                <a href="{{ url('/event/'.$event->slug.'/resep') }}" class="button lihat">lihat semua</a>
+                <a href="{{ url('/event/'.$event->slug.'/resep') }}" class="button lihat">see all</a>
             </div>
         
             <div class="spacer tall"></div>

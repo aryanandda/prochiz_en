@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\ProductSize;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -67,6 +68,7 @@ class ProductController extends Controller
             'characteristics' => 'required',
             'size' => 'required',
             'storage' => 'required',
+            'functionality' => 'required',
             'status' => 'required|in:published,draft',
         ]);
 
@@ -87,8 +89,9 @@ class ProductController extends Controller
         $product->tagline = $request->input('tagline');
         $product->ingredients = $request->input('ingredients');
         $product->characteristics = $request->input('characteristics');
-        $product->size = $request->input('size');
+//        $product->size = $request->input('size');
         $product->storage = $request->input('storage');
+        $product->functionality = $request->input('functionality');
 
         if ($request->hasFile('image')) {
             $product->image = $product->slug.'-'.uniqid().'.'.$request->file('image')->extension();
@@ -101,6 +104,20 @@ class ProductController extends Controller
         }
 
         $product->save();
+
+        $ecomm_names = $request->input('ecomm-name');
+        $ecomm_links = $request->input('ecomm-link');
+        $ecomm_status = $request->input('ecomm-status');
+
+        $product_size = [];
+        foreach ($request->input('size') as $key => $value) {
+            if ($value) {
+                $isActive = in_array($key, $ecomm_status) ? 1 : 0;
+                $product_size[] = new ProductSize(['size' => $value, 'ecomm_name' => $ecomm_names[$key], 'ecomm_link' => $ecomm_links[$key], 'is_active' => $isActive]);
+            }
+        }
+
+        $product->sizes()->saveMany($product_size);
 
         return redirect()->action('Admin\ProductController@edit', [$product->id])->withMessages('Your Post has been submitted');
     }
@@ -151,6 +168,7 @@ class ProductController extends Controller
             'characteristics' => 'required',
             'size' => 'required',
             'storage' => 'required',
+            'functionality' => 'required',
             'status' => 'required|in:published,draft',
         ]);
 
@@ -171,8 +189,9 @@ class ProductController extends Controller
         $product->tagline = $request->input('tagline');
         $product->ingredients = $request->input('ingredients');
         $product->characteristics = $request->input('characteristics');
-        $product->size = $request->input('size');
+//        $product->size = $request->input('size');
         $product->storage = $request->input('storage');
+        $product->functionality = $request->input('functionality');
 
         if ($request->hasFile('image')) {
             $storage_path = '/app/public/img/';
@@ -189,6 +208,22 @@ class ProductController extends Controller
         }
 
         $product->save();
+
+        $product->sizes()->delete();
+
+        $ecomm_names = $request->input('ecomm-name');
+        $ecomm_links = $request->input('ecomm-link');
+        $ecomm_status = $request->input('ecomm-status');
+
+        $product_size = [];
+        foreach ($request->input('size') as $key => $value) {
+            if ($value) {
+                $isActive = in_array($key, $ecomm_status) ? 1 : 0;
+                $product_size[] = new ProductSize(['size' => $value, 'ecomm_name' => $ecomm_names[$key], 'ecomm_link' => $ecomm_links[$key], 'is_active' => $isActive]);
+            }
+        }
+
+        $product->sizes()->saveMany($product_size);
 
         return redirect()->action('Admin\ProductController@edit', [$product->id])->withMessages('Your Post has been updated');
     }
@@ -207,6 +242,7 @@ class ProductController extends Controller
         File::delete(storage_path($storage_path.'/'.$product->image));
         File::delete(storage_path($storage_path.'/square/'.$product->image));
         File::delete(storage_path($storage_path.'/small/'.$product->image));
+        $product->sizes()->delete();
 
         Product::destroy($id);
 

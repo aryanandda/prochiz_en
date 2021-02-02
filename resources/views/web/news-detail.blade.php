@@ -53,7 +53,7 @@
 
     @if ($related->count() > 0)
         <div class="title-page">
-            <h2 class="text">NEWS TERKAIT</h2>
+            <h2 class="text">RELATED NEWS</h2>
         </div>
 
         <div class="resep-full-list">

@@ -29,7 +29,9 @@ class ProductController extends Controller
      */
     public function show($slug)
     {
-        $product = Product::status('published')->slug($slug)->first();
+        $product = Product::status('published')->with(['sizes' => function($q) {
+            return $q->where('is_active', true);
+        }])->slug($slug)->first();
 
         if (!$product) {
             return abort(404);
@@ -48,6 +50,9 @@ class ProductController extends Controller
             $footer_text = Article::type('footertext')->slug($slug)->status('published')->orderBy('published_at', 'desc')->first();
         }
 
-        return view('web.product-detail', compact('product', 'products', 'recipes', 'slug', 'currents', 'footer_text'));
+        $collection = collect($product->sizes);
+        $productSize = $collection->groupBy('size');
+
+        return view('web.product-detail', compact('product', 'productSize', 'products', 'recipes', 'slug', 'currents', 'footer_text'));
     }
 }

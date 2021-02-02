@@ -87,16 +87,78 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Size</label>
-                                        {!! Form::text('size', old('size'), ['class' => 'form-control', 'id' => 'size']) !!}
+                                        <div><label class="control-label">Sizes</label></div>
+
+                                        <div class="sizes">
+                                            <div class="size row" style="padding-bottom: 10px; display: flex">
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="size[]" placeholder="Size" required="">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select name="ecomm-name[]" class="form-control" >
+                                                        <option value="Alfacart">Alfacart</option>
+                                                        <option value="Blibli">Blibli</option>
+                                                        <option value="Hypermart Online">Hypermart Online</option>
+                                                        <option value="JD.ID">JD.ID</option>
+                                                        <option value="Klik Indogrosir">Klik Indogrosir</option>
+                                                        <option value="Klik Indomaret">Klik Indomaret</option>
+                                                        <option value="Shopee">Shopee</option>
+                                                        <option value="Yogya Online">Yogya Online</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="ecomm-link[]" placeholder="Ecommerce Link" required="">
+                                                </div>
+                                                <div class="col-md-3" style="margin: auto">
+                                                    <label style="margin: 0 !important">
+                                                        <input type="checkbox" name="ecomm-status[]" value="0">
+                                                        <span class="slider round">Active</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="size row" style="padding-bottom: 10px; display: flex">
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="size[]" placeholder="Size" required="">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <select name="ecomm-name[]" class="form-control" >
+                                                        <option value="Alfacart">Alfacart</option>
+                                                        <option value="Blibli">Blibli</option>
+                                                        <option value="Hypermart Online">Hypermart Online</option>
+                                                        <option value="JD.ID">JD.ID</option>
+                                                        <option value="Klik Indogrosir">Klik Indogrosir</option>
+                                                        <option value="Klik Indomaret">Klik Indomaret</option>
+                                                        <option value="Shopee">Shopee</option>
+                                                        <option value="Yogya Online">Yogya Online</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" name="ecomm-link[]" placeholder="Ecommerce Link" required="">
+                                                </div>
+                                                <div class="col-md-3" style="margin: auto">
+                                                    <label style="margin: 0 !important">
+                                                        <input type="checkbox" name="ecomm-status[]" value="1">
+                                                        <span class="slider round">Active</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div><button id="add-size" type="button" class="btn btn-success">+</button></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Storage</label>
                                         {!! Form::text('storage', old('storage'), ['class' => 'form-control', 'id' => 'storage']) !!}
                                     </div>
+
+                                    <div class="form-group">
+                                        <label>Functionality</label>
+                                        {!! Form::text('functionality', old('functionality'), ['class' => 'form-control', 'id' => 'functionality']) !!}
+                                    </div>
                                 </div>
-                                <div class="col-md-4"">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Featured Image</label>
                                         <input type="file" id="file" onchange="changePhoto()" style="display:none;" name="image">
@@ -125,6 +187,35 @@
     <input name="status" id="status" type="hidden">
 {!! Form::close() !!}
 </div>
+
+<template id="size-template">
+    <div class="size row" style="padding-bottom: 10px; display: flex">
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="size[]" placeholder="Size" required="">
+        </div>
+        <div class="col-md-3">
+            <select name="ecomm-name[]" class="form-control" >
+                <option value="Alfacart">Alfacart</option>
+                <option value="Blibli">Blibli</option>
+                <option value="Hypermart Online">Hypermart Online</option>
+                <option value="JD.ID">JD.ID</option>
+                <option value="Klik Indogrosir">Klik Indogrosir</option>
+                <option value="Klik Indomaret">Klik Indomaret</option>
+                <option value="Shopee">Shopee</option>
+                <option value="Yogya Online">Yogya Online</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="ecomm-link[]" placeholder="Ecommerce Link" required="">
+        </div>
+        <div class="col-md-3" style="margin: auto">
+            <label style="margin: 0 !important">
+                <input type="checkbox" name="ecomm-status[]" >
+                <span class="slider round">Active</span>
+            </label>
+        </div>
+    </div>
+</template>
 
 @stop
 
@@ -204,6 +295,22 @@ $(function(){
     @if(!empty(old('photo')))
         drawPhoto('{{ old('photo') }}');
     @endif
+});
+
+var sizeCount = 2,
+    sizeTemplate = $('#size-template').html();
+
+$('#add-size').on('click', function(){
+    var template = $('#size-template').prop('content');
+    var checkbox = $(template).find('input[type="checkbox"]')[0];
+    $(checkbox).attr("value", sizeCount)
+    // console.log($(checkbox).attr("name"));
+    // $('#size-template > div > div:nth-child(4) > label > input[type="checkbox"]')[0].setAttribute("value", `${sizeCount}`);
+    // console.log($('#size-template > div > div:nth-child(4) > label > input[type="checkbox"]'))
+
+    sizeCount++;
+    $('.sizes').append($('#size-template').html());
+    // $('#the-form > div > div.page-content > div > div:nth-child(2) > div > div > div > div.col-md-8 > div:nth-child(7) > div.sizes > div:nth-child(sizeCount) > div:nth-child(4) > label > input[type="checkbox"]')[0].setAttribute("value", `${sizeCount-1}`);
 });
 
 function resz()

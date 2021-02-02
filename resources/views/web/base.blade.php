@@ -42,6 +42,15 @@
     @show
 
     <link href="{{ mix('/assets/web/css/app.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .lang-icon, .dropdown.menu a.lang-icon{
+            padding: 0;
+            display: inline;
+        }
+        .lang-icon img{
+            width: 30px;
+        }
+    </style>
 
     <!-- Scripts -->
     <script>
@@ -51,6 +60,21 @@
     </script>
 
     @if (config('app.env') === 'production')
+        <!-- Global site tag (gtag.js) - Google Ads: 739538052 -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-739538052"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-739538052');
+        </script>
+
+        <!-- Event snippet for Smart Goal (All Web Site Data) conversion page -->
+        <script>
+          gtag('event', 'conversion', {'send_to': 'AW-739538052/AX3nCOPe86IBEITp0eAC'});
+        </script>
+
         <!-- Google Analytics-->
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -131,9 +155,10 @@
             <div class="small-6 column">
                 <button class="menu-icon" type="button" data-toggle="main-menu"></button>
             </div>
+            {{-- 
             <div class="small-6 column text-right">
                 <a href="{{ url("/upload-resep") }}" class="cta">UPLOAD RESEP</a>
-            </div>
+            </div> --}}
         </div>
 
         <div class="top-bar" id="main-menu">
@@ -156,11 +181,11 @@
 
                         <ul>
                             <li class="{{ Frontend::menu_active('kuliner', $currents) }}"><a href="{{ url('/kuliner') }}">PROCHIZ CULINARY</a></li>
-                            <li class="{{ Frontend::menu_active('partner', $currents) }}"><a href="{{ url('/partner') }}">PARTNER REGISTRATION</a></li>
+                            {{-- <li class="{{ Frontend::menu_active('partner', $currents) }}"><a href="{{ url('/partner') }}">PARTNER REGISTRATION</a></li> --}}
                         </ul>
                     </li>
                     <li class="{{ Frontend::menu_active('produk', $currents) }}">
-                        <a href="{{ url('/produk') }}">PRODUCT</a>
+                        <a href="{{ url('/produk') }}">PRODUCTS</a>
                     </li>
                     <li class="{{ Frontend::menu_active('artikel', $currents) }}">
                         <a href="#">ARTICLE</a>
@@ -182,16 +207,24 @@
             <div class="top-bar-right">
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li class="">
+                        <?php 
+                            $base = 'https://dapurkejuprochiz.com/';
+                        ?>
+                        <span style="font-size: .75em; font-weight: bold;">CHOOSE LANGUAGE : </span>
+                        <a class="lang-icon" href="{{ $base }}"><img src="{{ asset('indonesia.png') }}"></a>
+                        <a class="lang-icon" href="{{ $base.'en/' }}"><img src="{{ asset('uk.png') }}"></a>
+                    </li>
+                    <li class="">
                         <form action="{{ url('/search') }}" method="get">
                             <input class="search-input" type="text" name="s" placeholder="Find Recipe">
                             <button><img class="search-icon" src="{{ asset('assets/web/img/search-icon.png') }}"></button>
                         </form>
                     </li>
 
-                    <li><a href="{{ url("/upload-resep") }}" class="cta">UPLOAD RECIPE</a></li>
+                    {{-- <li><a href="{{ url("/upload-resep") }}" class="cta">UPLOAD RECIPE</a></li> --}}
 
                     @if (Auth::guest())
-                        <li class=""><a href="{{ url('/login') }}" class="login">LOGIN</a></li>
+                        {{-- <li class=""><a href="{{ url('/login') }}" class="login">LOGIN</a></li> --}}
                     @else
                         <li class="profile-pic">
                             <a href="#" class="img-box">
@@ -250,8 +283,8 @@
                         </div>
                         <div class="text-box">
                             <p>
-                            PT.Mulia Boga Raya<br>
-                            <strong>Kantor Pemasaran</strong><br>
+                            PT.Mulia Boga Raya Tbk<br>
+                            <strong>Marketing Office</strong><br>
                             Jl.Tubagus Angke Raya<br>
                             Ruko Angke Square blok A/8<br>
                             Jakarta Barat 11460, Indonesia
@@ -276,7 +309,7 @@
                             customer.care@prochiz.co.id
                         </div>
                     </li>
-                    <li class="hide-for-medium"><a href="{{ url('/page/daftar-alamat-distributor') }}">List Distributor</a></li>
+                    <li class="hide-for-medium"><a href="{{ url('/page/daftar-alamat-distributor') }}">Distributor List</a></li>
                 </ul>
             </div>
             <div class="small-12 medium-4 column text-center">
@@ -284,10 +317,11 @@
                 <span class="footer-copyright">
                     &copy; 2017 PROCHIZ Taste Better. All Rights Reserved. <br> 
                     <span class="show-for-medium">
-                        <a href="{{ url('/page/daftar-alamat-distributor') }}">List Distributor</a>
+                        <a href="{{ url('/page/daftar-alamat-distributor') }}">Distributor List</a>
                         &nbsp;|&nbsp;
                     </span>
-                    <a href="{{ url('/page/syarat-ketentuan') }}">Terms &amp; Conditons</a>
+                    <a href="{{ url('/page/syarat-ketentuan') }}">Terms &amp; Conditons</a><br>
+                    <a href="{{ url('/page/privacy-policy') }}">Privacy Policy</a>
                 </span>
             </div>
             <div class="small-12 medium-4 column">

@@ -30,7 +30,7 @@
                             <img src="{{ asset('assets/web/img/time-icon.png') }}">
                         </div>
                         <div class="text-box">
-                            {{ $recipe->time }} <span>menit</span>
+                            {{ $recipe->time }} <span>minutes</span>
                         </div>
                     </div>
                     <div class="table-item">
@@ -38,7 +38,7 @@
                             <img src="{{ asset('assets/web/img/food-icon.png') }}">
                         </div>
                         <div class="text-box">
-                            {{ $recipe->servings }} <span>porsi</span>
+                            {{ $recipe->servings }} <span>portion</span>
                         </div>
                     </div>
                 </div>    
@@ -65,9 +65,9 @@
             <h1 class="text-center text">{{ $recipe->name }}</h1>
             <div class="spacer short"></div> 
             @if ($recipe->type == 'prochiz')
-                <div class="resep-author text-center">oleh : {{ ($recipe->chef) ? $recipe->chef : 'Prochiz' }}</div>
+                <div class="resep-author text-center">by : {{ ($recipe->chef) ? $recipe->chef : 'Prochiz' }}</div>
             @else
-                <div class="resep-author text-center">oleh : {{ $recipe->user->name }}</div>
+                <div class="resep-author text-center">by : {{ $recipe->user->name }}</div>
             @endif
             <div class="spacer "></div> 
         </div>
@@ -99,7 +99,7 @@
                     <div class="small-12 medium-6 column text-right">
                         <div class="text-left">
                             <div class="title">
-                                <span>Bahan</span>
+                                <span>Ingredients</span>
                             </div>
                             <ul class="list-bahan">
                                 @foreach ($recipe->ingredients as $value)
@@ -111,7 +111,7 @@
                         
                     <div class="small-12 medium-6 column">
                         <div class="title">
-                            <span>Cara Memasak</span>
+                            <span>How To</span>
                         </div>
                         <ol class="list-cara">
                             @foreach ($recipe->directions as $value)
@@ -126,7 +126,7 @@
 
     @if ($related->count() > 0)
         <div class="title-page">
-            <h2 class="text">RESEP TERKAIT</h2>
+            <h2 class="text">RELATED RECIPES</h2>
         </div>
 
         <div class="resep-full-list">
@@ -136,15 +136,15 @@
                     <div class="resep-card user">
                         <div class="img-box">
                             <img style="width: 100%;" src="{{ asset('storage/img/square/'.$value->image) }}" alt="{{ $value->name }}">
-                            <img class="ribon" src="{{ asset('assets/web/img/'.$value->category->slug.'-ribon.png') }}">
+                            <img class="ribon" src="{{ asset('assets/web/img/'.$value->category->slug.'-ribbon.png?v=1') }}">
                         </div>
                         <div class="text-box text-center">
                             <h3 class="title">{{ $value->name }}</h3>
                             
                             @if ($value->type == 'prochiz')
-                                <span>oleh : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
+                                <span>by : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
                             @else
-                                <span>oleh : {{ $value->user->name }}</span>
+                                <span>by : {{ $value->user->name }}</span>
                             @endif
                         </div>
                         <a href="{{ url('/resep/'.$value->type.'/'.$value->id.'/'.$value->slug) }}" class="block-link"></a>

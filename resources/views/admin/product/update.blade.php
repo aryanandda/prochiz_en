@@ -25,8 +25,9 @@
     $tagline = $event->tagline;
     $ingredients = $event->ingredients;
     $characteristics = $event->characteristics;
-    $size = $event->size;
+//    $size = $event->size;
     $storage = $event->storage;
+    $functionality = $event->functionality;
     $image =  $event->image;
 
     if(!empty(old('name'))){
@@ -37,8 +38,9 @@
         $tagline = old('tagline');
         $ingredients = old('ingredients');
         $characteristics = old('characteristics');
-        $size = old('size');
+//        $size = old('size');
         $storage = old('storage');
+        $functionality = old('functionality');
     }
 ?>
 
@@ -114,12 +116,52 @@
 
                                     <div class="form-group">
                                         <label>Size</label>
-                                        {!! Form::text('size', $size, ['class' => 'form-control', 'id' => 'size']) !!}
+                                        <div class="sizes">
+                                            <?php $i=0; ?>
+                                            @foreach($event->sizes as $size)
+
+                                                <div class="size row" style="padding-bottom: 10px; display: flex">
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="size[]" placeholder="Size" required="" value="{{ $size->size }}">
+                                                        {{--                                                            <input type="text" class="form-control" name="productSizeId[]" placeholder="Size" required="" value="{{ $size->id }}" style="display: none">--}}
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select name="ecomm-name[]" class="form-control">
+                                                            <option value="Alfacart" <?php if($event->sizes[$i]->ecomm_name == 'Alfacart'){echo("selected");}?>>Alfacart</option>
+                                                            <option value="Blibli" <?php if($event->sizes[$i]->ecomm_name == 'Blibli'){echo("selected");}?>>Blibli</option>
+                                                            <option value="Hypermart Online" <?php if($event->sizes[$i]->ecomm_name == 'Hypermart Online'){echo("selected");}?>>Hypermart Online</option>
+                                                            <option value="JD.ID" <?php if($event->sizes[$i]->ecomm_name == 'JD.ID'){echo("selected");}?>>JD.ID</option>
+                                                            <option value="Klik Indogrosir" <?php if($event->sizes[$i]->ecomm_name == 'Klik Indogrosir'){echo("selected");}?>>Klik Indogrosir</option>
+                                                            <option value="Klik Indomaret" <?php if($event->sizes[$i]->ecomm_name == 'Klik Indomaret'){echo("selected");}?>>Klik Indomaret</option>
+                                                            <option value="Shopee" <?php if($event->sizes[$i]->ecomm_name == 'Shopee'){echo("selected");}?>>Shopee</option>
+                                                            <option value="Yogya Online" <?php if($event->sizes[$i]->ecomm_name == 'Yogya Online'){echo("selected");}?>>Yogya Online</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" class="form-control" name="ecomm-link[]" placeholder="Ecommerce Link" required="" value="{{ $size->ecomm_link }}">
+                                                    </div>
+                                                    <div class="col-md-3" style="margin: auto">
+                                                        <label style="margin: 0 !important">
+                                                            <input type="checkbox" name="ecomm-status[]" {{ $size->is_active == 1 ? 'checked' : '' }} required="" value="{{$i}}">
+                                                            <span class="slider round">Active</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <?php $i++; ?>
+
+                                            @endforeach
+                                        </div>
+                                        <div><button id="add-size" type="button" class="btn btn-success">+</button></div>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Storage</label>
                                         {!! Form::text('storage', $storage, ['class' => 'form-control', 'id' => 'storage']) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Functionality</label>
+                                        {!! Form::text('functionality', $functionality, ['class' => 'form-control', 'id' => 'functionality']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4"">
@@ -152,6 +194,35 @@
 {!! Form::close() !!}
 </div>
 
+<template id="size-template">
+    <div class="size row" style="padding-bottom: 10px; display: flex">
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="size[]" placeholder="Size" required="">
+        </div>
+        <div class="col-md-3">
+            <select name="ecomm-name[]" class="form-control" >
+                <option value="Alfacart">Alfacart</option>
+                <option value="Blibli">Blibli</option>
+                <option value="Hypermart Online">Hypermart Online</option>
+                <option value="JD.ID">JD.ID</option>
+                <option value="Klik Indogrosir">Klik Indogrosir</option>
+                <option value="Klik Indomaret">Klik Indomaret</option>
+                <option value="Shopee">Shopee</option>
+                <option value="Yogya Online">Yogya Online</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" name="ecomm-link[]" placeholder="Ecommerce Link" required="">
+        </div>
+        <div class="col-md-3" style="margin: auto">
+            <label style="margin: 0 !important">
+                <input type="checkbox" name="ecomm-status[]">
+                <span class="slider round">Active</span>
+            </label>
+        </div>
+    </div>
+</template>
+
 @stop
 
 @section('bottomExtraScript')
@@ -160,6 +231,19 @@
 <script type="text/javascript" src="{{ asset('vendor/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/admin/vendor/ckeditor/ckeditor.js?v=1') }}"></script>
 <script type="text/javascript">
+
+var sizeCount = {{ $event->sizes->count() }},
+    sizeTemplate = $('#size-template').html();
+
+$('#add-size').on('click', function(){
+    var template = $('#size-template').prop('content');
+    var checkbox = $(template).find('input[type="checkbox"]')[0];
+    $(checkbox).attr("value", sizeCount)
+    sizeCount++;
+
+    $('.sizes').append($('#size-template').html());
+});
+
 function submitPublish()
 {
     $("#status").val('published');

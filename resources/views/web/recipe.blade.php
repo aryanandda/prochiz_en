@@ -1,14 +1,14 @@
 @extends('web.base')
 
 @section('pagemeta')
-    <?php $metadesc = (isset($footer_text)) ? $footer_text->metadesc() : 'Semua Resep Masakan ' . ucfirst($type) . ' dari Dapur Keju Prochiz'; ?>
+    <?php $metadesc = (isset($footer_text)) ? $footer_text->metadesc() : 'All Recipes ' . ucfirst($type) . ' dari Dapur Keju Prochiz'; ?>
     
-    <title>Semua Resep Masakan {{ ucfirst($type) }} | Dapur Keju Prochiz</title>
+    <title>All Recipes {{ ucfirst($type) }} | Dapur Keju Prochiz</title>
 
     <meta name="description" content="{{ $metadesc }}">
 
     <meta property="og:url" content="{{ url('/resep/'.$type) }}" />
-    <meta property="og:title" content="Semua Resep Masakan {{ ucfirst($type) }} | Dapur Keju Prochiz" />
+    <meta property="og:title" content="All Recipes {{ ucfirst($type) }} | Dapur Keju Prochiz" />
     <meta property="og:description" content="{{ $metadesc }}" />
     <meta property="og:image" content="{{ asset('assets/web/img/resep-hero-1.jpg') }}" />
 @endsection
@@ -17,9 +17,9 @@
     <div class="hero resep-page">
         <div class="img-box">
         @if ($banner)
-            <img src="{{ asset('storage/img/'.$banner->image) }}" alt="Semua Resep {{ ucfirst($type) }}">
+            <img src="{{ asset('storage/img/'.$banner->image) }}" alt="All Recipes {{ ucfirst($type) }}">
         @else
-            <img src="{{ asset('assets/web/img/resep-hero-1.jpg') }}" alt="Semua Resep {{ ucfirst($type) }}">
+            <img src="{{ asset('assets/web/img/resep-hero-1.jpg') }}" alt="All Recipes {{ ucfirst($type) }}">
         @endif
         </div>
     </div>
@@ -29,40 +29,40 @@
             <ul class="menu small-text-center">
                 <li class="filter active">
                     <a href="{{ url('/resep/'.$type) }}">
-                        <img class="show-for-medium" src="{{ asset('assets/web/img/all-recipe-icon-default.png') }}">
-                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/all-recipe-icon-active.png') }}">
-                        <span class="hide-for-medium">Semua Resep</span>
+                        <img class="show-for-medium" src="{{ asset('assets/web/img/all-recipe-icon-active.png?v=1') }}">
+                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/all-recipe-icon-default.png?v=1') }}">
+                        <span class="hide-for-medium">All Recipes</span>
                     </a>
                 </li>
                 <li class="connector show-for-large"><hr class=""></li>
                 <li class="filter">
                     <a href="{{ url('/resep/'.$type.'/kategori/sarapan') }}">
-                        <img class="show-for-medium" src="{{ asset('assets/web/img/sarapan-icon-default.png') }}">
-                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/sarapan-icon-active.png') }}">
-                        <span class="hide-for-medium">Sarapan</span>
+                        <img class="show-for-medium" src="{{ asset('assets/web/img/sarapan-icon-active.png?v=1') }}">
+                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/sarapan-icon-default.png?v=1') }}">
+                        <span class="hide-for-medium">Breakfast</span>
                     </a>
                 </li>
                 <li class="connector show-for-large"><hr class=""></li>
                 <li class="filter">
                     <a href="{{ url('/resep/'.$type.'/kategori/makan-siang') }}">
-                        <img class="show-for-medium" src="{{ asset('assets/web/img/makan-siang-icon-default.png') }}">
-                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/makan-siang-icon-active.png') }}">
-                        <span class="hide-for-medium">Makan Siang</span>
+                        <img class="show-for-medium" src="{{ asset('assets/web/img/makan-siang-icon-active.png?v=1') }}">
+                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/makan-siang-icon-default.png?v=1') }}">
+                        <span class="hide-for-medium">Lunch</span>
                     </a>
                 </li>
                 <li class="connector show-for-large"><hr class=""></li>
                 <li class="filter">
                     <a href="{{ url('/resep/'.$type.'/kategori/makan-malam') }}">
-                        <img class="show-for-medium" src="{{ asset('assets/web/img/makan-malam-icon-default.png') }}">
-                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/makan-malam-icon-active.png') }}">
-                        <span class="hide-for-medium">Makan Malam</span>
+                        <img class="show-for-medium" src="{{ asset('assets/web/img/makan-malam-icon-active.png?v=1') }}">
+                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/makan-malam-icon-default.png?v=1') }}">
+                        <span class="hide-for-medium">Dinner</span>
                     </a>
                 </li>
                 <li class="connector show-for-large"><hr class=""></li>
                 <li class="filter">
                     <a href="{{ url('/resep/'.$type.'/kategori/snack') }}">
-                        <img class="show-for-medium" src="{{ asset('assets/web/img/snack-icon-default.png') }}">
-                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/snack-icon-active.png') }}">
+                        <img class="show-for-medium" src="{{ asset('assets/web/img/snack-icon-default.png?v=1') }}">
+                        <img class="active-img show-for-medium" src="{{ asset('assets/web/img/snack-icon-active.png?v=1') }}">
                         <span class="hide-for-medium">Snack</span>
                     </a>
                 </li>
@@ -77,15 +77,15 @@
                 <div class="resep-card user">
                     <div class="img-box">
                         <img style="width: 100%;" src="{{ asset('storage/img/square/'.$value->image) }}" alt="{{ $value->name }}">
-                        <img class="ribon" src="{{ asset('assets/web/img/'.$value->category->slug.'-ribon.png') }}">
+                        <img class="ribon" src="{{ asset('assets/web/img/'.$value->category->slug.'-ribbon.png?v=1') }}">
                     </div>
                     <div class="text-box text-center">
                         <h3 class="title">{{ $value->name }}</h3>
                         
                         @if ($value->type == 'prochiz')
-                            <span>oleh : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
+                            <span>by : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
                         @else
-                            <span>oleh : {{ $value->user->name }}</span>
+                            <span>by : {{ $value->user->name }}</span>
                         @endif
                     </div>
                     <a href="{{ url('/resep/'.$value->type.'/'.$value->id.'/'.$value->slug) }}" class="block-link"></a>

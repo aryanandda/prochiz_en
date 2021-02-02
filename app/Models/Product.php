@@ -49,4 +49,12 @@ class Product extends Model
 
         return substr(strip_tags($this->description), 0, $limit);
     }
+
+    /**
+     * Get the sizes for the product.
+     */
+    public function sizes()
+    {
+        return $this->hasMany(ProductSize::class);
+    }
 }

@@ -15,8 +15,8 @@
 @section('content')
     <div class="hero produk">
         <div class="img-box">
-            <img src="{{ asset('assets/web/img/produk-text.png') }}">
-
+            {{-- <img src="{{ asset('assets/web/img/produk-text.png') }}">
+ --}}
             <div class="spacer tall hide-for-large"></div>
         </div>
 
@@ -44,7 +44,7 @@
 
     <div class="produk-detail">
         <div class="produk-detail-cage">
-            <div class="expanded row align-middle">
+            <div class="expanded row align-middle" style="margin-bottom: 60px">
                 <div class="small-12 large-6 column">
                     <div class="img-box">
                         <img src="{{ asset('storage/img/'.$product->image) }}" alt="{{ $product->name }}">
@@ -55,6 +55,39 @@
                         <h1 class="title-produk">{{ $product->tagline }}</h1>
                         <div>{!! $product->description !!}</div>
                     </div>
+                    <div class="expanded row space-evenly">
+                        <?php
+                        $i = 0;
+                        ?>
+                        @foreach ($productSize as $key => $value)
+                            <?php $i++; ?>
+                            <div class="small-12 large-5 column" style="margin-bottom: 10px">
+                                <h3 class="title text-center">{{$key}}</h3>
+                                <div class="buy-ecommerce">
+                                    <div class="buy-ecommerce-title{{$i}} buy-ecommerce-title">
+                                        <h3 class="title no-margin center">
+                                            Buy now
+                                            <img src="{{ asset('assets/web/img/arrow_up.svg') }}" class="arrow-up{{$i}}}">
+                                        </h3>
+                                    </div>
+                                    <div class="buy-ecommerce-description{{$i}} buy-ecommerce-description">
+                                        @foreach($productSize[$key] as $detail)
+                                            @if($loop->last)
+                                                <div class="buy-ecommerce-link">
+                                                    @else
+                                                        <div class="buy-ecommerce-link divider">
+                                                            @endif
+                                                            <a href="{{ $detail->ecomm_link }}" target="_blank">
+                                                                <img src="{{ asset('assets/web/img/'.$detail->ecomm_name.'.svg') }}" alt="" width="40">
+                                                                {{ $detail->ecomm_name }}
+                                                            </a>
+                                                        </div>
+                                                        @endforeach
+                                                </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
                 </div>
             </div>
             <div class="expanded row">
@@ -62,16 +95,26 @@
             </div>
             <div class="expanded row">
                 <div class="small-12 large-4 column resep-detail">
-                    <h3 class="title">&nbsp;BAHAN</h3>
+                    <h3 class="title">&nbsp;INGREDIENTS</h3>
                     <p>{{ $product->ingredients }}</p>
                 </div>
                 <div class="small-12 large-4 column resep-detail">
-                    <h3 class="title">&nbsp;KARAKTERISTIK</h3>
+                    <h3 class="title">&nbsp;CHARACTERISTIC</h3>
                     <p>{{ $product->characteristics }}</p>
+                    <h3 class="title">&nbsp;FUNCTIONALITY</h3>
+                    <p>{{ $product->functionality }}</p>
                 </div>
                 <div class="small-12 large-4 column resep-detail">
                     <h3 class="title">&nbsp;SIZE</h3>
-                    <p>{{ $product->size }}</p>
+                    <p>
+                        @foreach($productSize as $key => $size)
+                            @if($loop->last)
+                                <span>{{$key}}</span>
+                            @else
+                                <span>{{$key}}, </span>
+                            @endif
+                        @endforeach
+                    </p>
 
                     <h3 class="title">&nbsp;STORAGE</h3>
                     <p>{{ $product->storage }}</p>
@@ -83,7 +126,7 @@
 
     @if ($recipes->count() > 0)
         <div class="title-page">
-            <h3 class="text">RESEP TERKAIT {{ strtoupper($product->name) }}</h3>
+            <h3 class="text">RELATED RICIPES - {{ strtoupper($product->name) }}</h3>
         </div>
 
         <div class="spacer"></div>
@@ -108,9 +151,9 @@
                             <h3 class="title">{{ $value->name }}</h3>
                             
                             @if ($value->type == 'prochiz')
-                                <span>oleh : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
+                                <span>by : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
                             @else
-                                <span>oleh : {{ $value->user->name }}</span>
+                                <span>by : {{ $value->user->name }}</span>
                             @endif
                         </div>
                         <a href="{{ url('/resep/'.$value->type.'/'.$value->id.'/'.$value->slug) }}" class="block-link"></a>
@@ -135,5 +178,16 @@
         $('#product-selection').on('change', function(){
             window.location.href = $(this).val();
         });
+
+        var clickable = <?php Print($i); ?>;
+        for (let i = 1; i <= clickable; i++) {
+            $(`.buy-ecommerce-title${i}`).on('click', function(){
+                if ($(`.buy-ecommerce-description${i}`).css("display") != 'none') {
+                    $(`.buy-ecommerce-description${i}`).css({"display": "none"})
+                } else {
+                    $(`.buy-ecommerce-description${i}`).css({"display": ""})
+                }
+            });
+        }
     </script>
 @endsection

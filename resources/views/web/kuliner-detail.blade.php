@@ -46,11 +46,11 @@
                 
                 <div class="row">
                     <div class="small-12 large-4 column resep-detail">
-                        <h3 class="title">&nbsp;<span>Deskripsi</span></h3>
+                        <h3 class="title">&nbsp;<span>Description</span></h3>
                         <div class="desc">{!! $partner->description !!}</div>
 
                         <div class="spacer"></div>
-                        <h3 class="title">&nbsp;<span>Jenis Makanan</span></h3>
+                        <h3 class="title">&nbsp;<span>Menus</span></h3>
                         <div class="desc">{{ implode(', ', $partner->categories->pluck('name')->toArray()) }}</div>
                     </div>
                     <div class="small-12 large-4 column resep-detail">
@@ -58,7 +58,7 @@
                         <div class="desc">{{ $partner->hours }}</div>
 
                         <div class="spacer"></div>
-                        <h3 class="title">&nbsp;<span>Telepon</span></h3>
+                        <h3 class="title">&nbsp;<span>Phone</span></h3>
                         <div class="desc">{{ $partner->phone }}</div>
                     </div>
                     <div class="small-12 large-4 column resep-detail">
@@ -87,7 +87,7 @@
                     </div>
                     <div class="row">
                         <div class="small-12 column resep-detail">
-                            <h3 class="title">&nbsp;<span>Galeri</span></h3>
+                            <h3 class="title">&nbsp;<span>Gallery</span></h3>
                             <div class="desc row kuliner-gallery">
                             @foreach ($galleries as $value)
                                 <div class="small-4 medium-3 large-2 column">

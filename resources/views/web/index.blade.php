@@ -9,12 +9,12 @@
         <meta property="og:title" content="Dapur Keju Prochiz" />
         <meta property="og:description" content="{{ $footer_text->metadesc() }}" />
     @else
-        <title>Dapur Keju Prochiz</title>
+        <title>Prochiz Cheddar Cheese</title>
 
-        <meta name="description" content="Keju adalah makanan yang terbuat dari susu yang diproduksi ke dalam berbagai macam rasa, tekstur, dan bentuk. Keju memiliki hampir semua kandungan nutrisi pada susu, seperti protein, vitamin, mineral, kalsium, fosfor, lemak dan kolesterol. Salah satu jenis keju yang paling populer, termasuk di Indonesia adalah keju cheddar. Keju ini termasuk ke dalam jenis keju keras. Pada umumnya, keju cheddar digunakan sebagai bahan dasar utama untuk membuat kue dan makanan.">
+        <meta name="description" content="To date, PROCHIZ has produced various variants of processed cheddar cheese products, including PROCHIZ cheddar cheese which then developed its premium variant, namely PROCHIZ GOLD cheddar cheese, PROCHIZ SPREADY, PROCHIZ MAYO mayonnaise, and PROCHIZ SLICE cheeses which are one - only cheddar cheese can be stored at room temperature without a refrigerator. PROCHIZ has a high commitment in marketing its products, only the best quality is given to the people of Indonesia.">
 
         <meta property="og:title" content="Dapur Keju Prochiz" />
-        <meta property="og:description" content="Keju adalah makanan yang terbuat dari susu yang diproduksi ke dalam berbagai macam rasa, tekstur, dan bentuk. Keju memiliki hampir semua kandungan nutrisi pada susu, seperti protein, vitamin, mineral, kalsium, fosfor, lemak dan kolesterol. Salah satu jenis keju yang paling populer, termasuk di Indonesia adalah keju cheddar. Keju ini termasuk ke dalam jenis keju keras. Pada umumnya, keju cheddar digunakan sebagai bahan dasar utama untuk membuat kue dan makanan." />
+        <meta property="og:description" content="To date, PROCHIZ has produced various variants of processed cheddar cheese products, including PROCHIZ cheddar cheese which then developed its premium variant, namely PROCHIZ GOLD cheddar cheese, PROCHIZ SPREADY, PROCHIZ MAYO mayonnaise, and PROCHIZ SLICE cheeses which are one - only cheddar cheese can be stored at room temperature without a refrigerator. PROCHIZ has a high commitment in marketing its products, only the best quality is given to the people of Indonesia." />
     @endif
 
     <meta property="og:url" content="{{ url('/') }}" />
@@ -23,12 +23,12 @@
 
 @section('content')
     <div id="hero-index" class="hero index" style="height: 600px;">
-        <div class="text-box">
-            <img class="text" src="{{ asset('assets/web/img/kresikan-resepmu.png') }}">
+        <div class="text-box">{{-- 
+            <img class="text" src="{{ asset('assets/web/img/kresikan-resepmu.png') }}"> --}}
             <p class="text-body"></p>
-            <a class="cta" href="{{ url('upload-resep') }}"><img src="{{ asset('assets/web/img/upload-resep.png') }}"></a>
+            {{-- <a class="cta" href="{{ url('upload-resep') }}"><img src="{{ asset('assets/web/img/upload-resep.png') }}"></a>
             <br/>  
-            <a href="{{ url('page/syarat-ketentuan') }}" class="syarat">syarat dan ketentuan</a>  
+            <a href="{{ url('page/syarat-ketentuan') }}" class="syarat">syarat dan ketentuan</a>   --}}
         </div>  
     </div>
 
@@ -42,19 +42,19 @@
                 </div>
             </div>
 
-            <div class="spacer giant"></div>
+            {{-- <div class="spacer giant"></div> --}}
         @endif
 
         @if ($prochizlover_recipes->count() > 0)
+            <?php /*
             <div class="row align-middle">
                 <div class="small-12 medium-6 large-8 column">
                     <h2 class="title-section resep-title small-text-center">{{ $prochizlover_recipes_title }}</h2>
                 </div>
                 <div class="medium-6 large-4 column text-right show-for-medium">
-                    <a href="{{ $prochizlover_recipes_link }}" class="button lihat">lihat semua</a>
+                    <a href="{{ $prochizlover_recipes_link }}" class="button lihat">see all</a>
                 </div>
             </div>
-            
             <div class="spacer"></div>
 
             <div class="row">
@@ -68,7 +68,7 @@
                         <div class="text-box text-center">
                             <h3 class="title">{{ $value->name }}</h3>
                             
-                            <span>oleh : {{ $value->user->name }}</span>
+                            <span>by : {{ $value->user->name }}</span>
                         </div>
                         <a href="{{ url('/resep/'.$value->type.'/'.$value->id.'/'.$value->slug) }}" class="block-link"></a>
                     </div>
@@ -76,25 +76,28 @@
             @endforeach
             </div>
 
+
             <div class="spacer tall hide-for-medium"></div>
             
+            */ ?>
+            
             <div class="small-12 column text-center hide-for-medium">
-                <a href="{{ $prochizlover_recipes_link }}" class="button lihat">lihat semua</a>
+                <a href="{{ $prochizlover_recipes_link }}" class="button lihat">see all</a>
             </div>
-
+{{-- 
             <div class="spacer tall hide-for-medium"></div>
             <hr class="hide-for-medium" />
             <div class="spacer tall hide-for-medium"></div>
         
-            <div class="spacer giant show-for-medium"></div>
+            <div class="spacer giant show-for-medium"></div> --}}
         @endif
 
         <div class="expanded row align-middle">
             <div class="small-12 medium-6 column small-text-center">
-                <h2 class="title-section resep-title">RESEP PROCHIZ</h2>
+                <h2 class="title-section resep-title">PROCHIZ RECIPE</h2>
             </div>
             <div class="medium-6 column text-right show-for-medium">
-                <a href="{{ url('resep/prochiz') }}" class="button lihat">lihat semua</a>
+                <a href="{{ url('resep/prochiz') }}" class="button lihat">see all</a>
             </div>
         </div>
     </div>
@@ -108,9 +111,9 @@
                         <img style="width: 100%;" src="{{ asset('storage/img/square/'.$value->image) }}" alt="{{ $value->name }}">
                     </div>
                     <div class="text-box text-center">
-                        <img class="ribon" src="{{ asset('assets/web/img/'.$value->category->slug.'-ribon.png') }}">
+                        <img class="ribon" src="{{ asset('assets/web/img/'.$value->category->slug.'-ribbon.png?v=1') }}">
                         <h3 class="title">{{ $value->name }}</h3>
-                        <span>oleh : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
+                        <span>by : {{ ($value->chef) ? $value->chef : 'Prochiz' }}</span>
                     </div>
                     <a href="{{ url('/resep/'.$value->type.'/'.$value->id.'/'.$value->slug) }}" class="block-link"></a>
                 </div>
@@ -126,7 +129,7 @@
             <div class="small-12 large-6 column">
                 <div class="pc-card text-center">
                     <div class="text-box">
-                        <h3 class="title">TIPS &amp; TRICK</h3>
+                        <h3 class="title">TIPS &amp; TRICKS</h3>
                     </div>
 
                     <div class="spacer tall"></div>
@@ -207,7 +210,7 @@
                 <h2 class="title-section resep-title">VIDEO</h2>
             </div>
             <div class="medium-6 column text-right show-for-medium">
-                <a href="{{ url('/video') }}" class="button lihat">lihat semua</a>
+                <a href="{{ url('/video') }}" class="button lihat">see all</a>
             </div>
         </div>
 
@@ -238,7 +241,7 @@
         <div class="spacer hide-for-medium"></div>
         
         <div class="small-12 column text-center hide-for-medium">
-            <a href="{{ url('video') }}" class="button lihat">lihat semua</a>
+            <a href="{{ url('video') }}" class="button lihat">see all</a>
         </div>
     </div>
 @endsection

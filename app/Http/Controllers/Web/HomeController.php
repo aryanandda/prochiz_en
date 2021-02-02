@@ -27,7 +27,7 @@ class HomeController extends Controller
             $prochizlover_recipes_link = url('/event/'.$event->slug.'/resep');
         }else {
             $prochizlover_recipes = Recipe::type('prochizlover')->status('approved')->with('user', 'category')->orderBy('published_at', 'desc')->limit(4)->get();
-            $prochizlover_recipes_title = strtoupper('Resep Prochizlovers');
+            $prochizlover_recipes_title = strtoupper('Prochizlovers Recipe');
             $prochizlover_recipes_link = url('/resep/prochizlover');
         }
 
