@@ -11331,14 +11331,14 @@ label.varian-checkbox {
 }
 
 .buy-ecommerce {
-    border: 1px solid red;
+    border: 1px solid #BF2530;
     border-radius: 10px;
 }
 
 .buy-ecommerce-title {
-    border: 1px solid red;
+    border: 1px solid #BF2530;
     border-radius: 9px;
-    background-color: red;
+    background-color: #BF2530;
     padding: 5px 10px;
     text-align: center;
     color: white;
@@ -11354,7 +11354,7 @@ label.varian-checkbox {
 }
 
 .buy-ecommerce-description .divider {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid #BF2530;
 }
 
 .buy-ecommerce-link {

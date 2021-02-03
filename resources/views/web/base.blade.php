@@ -41,7 +41,7 @@
     @section('styles')
     @show
 
-    <link href="/assets/web/css/app.css" rel="stylesheet">
+    <link href="{{ asset('/assets/web/css/app.css') }}" rel="stylesheet">
     <style type="text/css">
         .lang-icon, .dropdown.menu a.lang-icon{
             padding: 0;
