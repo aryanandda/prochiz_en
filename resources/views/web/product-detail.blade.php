@@ -62,7 +62,7 @@
                         @foreach ($productSize as $key => $value)
                             <?php $i++; ?>
                             <div class="small-12 large-5 column" style="margin-bottom: 10px">
-                                <h3 class="title text-center">{{$key}}</h3>
+                                <h5 class="title text-center"style="color: #58595b;font-weight: 700">{{$key}}</h5>
                                 <div class="buy-ecommerce">
                                     <div class="buy-ecommerce-title{{$i}} buy-ecommerce-title">
                                         <h3 class="title no-margin center">
