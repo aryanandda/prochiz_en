@@ -134,6 +134,7 @@
                                                             <option value="Klik Indogrosir" <?php if($event->sizes[$i]->ecomm_name == 'Klik Indogrosir'){echo("selected");}?>>Klik Indogrosir</option>
                                                             <option value="Klik Indomaret" <?php if($event->sizes[$i]->ecomm_name == 'Klik Indomaret'){echo("selected");}?>>Klik Indomaret</option>
                                                             <option value="Shopee" <?php if($event->sizes[$i]->ecomm_name == 'Shopee'){echo("selected");}?>>Shopee</option>
+                                                            <option value="Tokopedia" <?php if($event->sizes[$i]->ecomm_name == 'Tokopedia'){echo("selected");}?>>Tokopedia</option>
                                                             <option value="Yogya Online" <?php if($event->sizes[$i]->ecomm_name == 'Yogya Online'){echo("selected");}?>>Yogya Online</option>
                                                         </select>
                                                     </div>
@@ -208,6 +209,7 @@
                 <option value="Klik Indogrosir">Klik Indogrosir</option>
                 <option value="Klik Indomaret">Klik Indomaret</option>
                 <option value="Shopee">Shopee</option>
+                <option value="Tokopedia">Tokopedia</option>
                 <option value="Yogya Online">Yogya Online</option>
             </select>
         </div>

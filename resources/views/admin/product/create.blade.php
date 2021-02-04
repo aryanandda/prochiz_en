@@ -103,6 +103,7 @@
                                                         <option value="Klik Indogrosir">Klik Indogrosir</option>
                                                         <option value="Klik Indomaret">Klik Indomaret</option>
                                                         <option value="Shopee">Shopee</option>
+                                                        <option value="Tokopedia">Tokopedia</option>
                                                         <option value="Yogya Online">Yogya Online</option>
                                                     </select>
                                                 </div>
@@ -130,6 +131,7 @@
                                                         <option value="Klik Indogrosir">Klik Indogrosir</option>
                                                         <option value="Klik Indomaret">Klik Indomaret</option>
                                                         <option value="Shopee">Shopee</option>
+                                                        <option value="Tokopedia">Tokopedia</option>
                                                         <option value="Yogya Online">Yogya Online</option>
                                                     </select>
                                                 </div>
@@ -202,6 +204,7 @@
                 <option value="Klik Indogrosir">Klik Indogrosir</option>
                 <option value="Klik Indomaret">Klik Indomaret</option>
                 <option value="Shopee">Shopee</option>
+                <option value="Tokopedia">Tokopedia</option>
                 <option value="Yogya Online">Yogya Online</option>
             </select>
         </div>
