@@ -95,7 +95,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $product->image = $product->slug.'-'.uniqid().'.'.$request->file('image')->extension();
-            $storage_path = '/app/public/img/';
+            $storage_path = 'app/public/img';
             Image::make($request->file('image'))->save(storage_path($storage_path.'/'.$product->image));
             Image::make($request->file('image'))->fit(200,200)->save(storage_path($storage_path.'/square/'.$product->image));
             Image::make($request->file('image'))->resize(100, null, function ($constraint) {
@@ -108,6 +108,10 @@ class ProductController extends Controller
         $ecomm_names = $request->input('ecomm-name');
         $ecomm_links = $request->input('ecomm-link');
         $ecomm_status = $request->input('ecomm-status');
+
+        if ($ecomm_status == null) {
+            $ecomm_status = [];
+        }
 
         $product_size = [];
         foreach ($request->input('size') as $key => $value) {
@@ -194,7 +198,7 @@ class ProductController extends Controller
         $product->functionality = $request->input('functionality');
 
         if ($request->hasFile('image')) {
-            $storage_path = '/app/public/img/';
+            $storage_path = 'app/public/img';
             File::delete(storage_path($storage_path.'/'.$product->image));
             File::delete(storage_path($storage_path.'/square/'.$product->image));
             File::delete(storage_path($storage_path.'/small/'.$product->image));
@@ -214,6 +218,10 @@ class ProductController extends Controller
         $ecomm_names = $request->input('ecomm-name');
         $ecomm_links = $request->input('ecomm-link');
         $ecomm_status = $request->input('ecomm-status');
+
+        if ($ecomm_status == null) {
+            $ecomm_status = [];
+        }
 
         $product_size = [];
         foreach ($request->input('size') as $key => $value) {

@@ -208,7 +208,7 @@
                 <ul class="dropdown menu" data-dropdown-menu>
                     <li class="">
                         <?php 
-                            $base = 'https://dapurkejuprochiz.com/';
+                            $base = 'https://www.dapurkejuprochiz.com/';
                         ?>
                         <span style="font-size: .75em; font-weight: bold;">CHOOSE LANGUAGE : </span>
                         <a class="lang-icon" href="{{ $base }}"><img src="{{ asset('indonesia.png') }}"></a>
